@@ -34,6 +34,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp() {
 
+
+    var moneyCounter by remember{ mutableStateOf(0) }
+
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -46,11 +49,18 @@ fun MyApp() {
         ) {
 
             Text(
-                text = "$100",
+                text = "$${moneyCounter}",
                 style = TextStyle(color = Color.White, fontSize = 30.sp, fontWeight = FontWeight.ExtraBold))
 
             Spacer(modifier = Modifier.height(130.dp))
-            CreateCircle()
+            CreateCircle(moneyCounter = moneyCounter){
+                moneyCounter = it + 1
+            }
+            
+            if(moneyCounter > 5){
+                Text(text = "Money money money")
+            }
+            
         }
 
 
@@ -59,19 +69,15 @@ fun MyApp() {
 
 }
 
-@Preview(showBackground = true)
 @Composable
-fun CreateCircle() {
-
-
-    var moneyConter by remember{ mutableStateOf(0) }
+fun CreateCircle(moneyCounter : Int = 0, updateMoneyCounter: (Int) -> Unit) {
 
     Card(
         modifier = Modifier
             .padding(3.dp)
             .size(105.dp)
             .clickable {
-                moneyConter += 1
+                updateMoneyCounter(moneyCounter)
             }
         ,
         shape = CircleShape,
