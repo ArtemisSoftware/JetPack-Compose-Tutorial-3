@@ -14,6 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -68,32 +69,19 @@ private fun TopHeader(totalPerPerson: Double = 0.0) {
 
 
 
-@ExperimentalComposeUiApi
-@Preview(showBackground = false)
-@Composable
-private fun MainContent(
-
-) {
-
-
-    BillForm(){ billAmount ->
-
-
-
-    }
-
-}
-
 
 
 @ExperimentalComposeUiApi
-@Preview(showBackground = false)
 @Composable
 private fun BillForm(
     modifier: Modifier = Modifier,
-    onValueChange: (String)  -> Unit = {}
+    range: IntRange = 1..100,
+    splitByState: MutableState<Int>,
+    tipAmountState: MutableState<Double>,
+    totalPerPersonState: MutableState<Double>,
+    onValueChange: (String, Int) -> Unit = {totalBill, tipPercentage ->},
 
-) {
+    ) {
 
     val totalBillState = remember {
         mutableStateOf("")
@@ -112,26 +100,12 @@ private fun BillForm(
     val tipPercentage = (sliderPositionState.value * 100).toInt()
 
 
-    val splitByState = remember {
-        mutableStateOf(1)
-    }
-
-    val tipAmountStatevalue = remember {
-        mutableStateOf(0.0)
-    }
-
-
-    val totalPerPersonState = remember {
-        mutableStateOf(0.0)
-    }
-
-    val range = IntRange(start = 1, endInclusive = 100)
 
     val keyboardController = LocalSoftwareKeyboardController.current
 
     TopHeader(totalPerPerson = totalPerPersonState.value)
 
-    Surface(modifier = Modifier
+    Surface(modifier = modifier
         .padding(12.dp)
         .fillMaxWidth(),
         shape = RoundedCornerShape(corner = CornerSize(8.dp)),
@@ -153,10 +127,12 @@ private fun BillForm(
                 enabled = true,
                 isSingleLine = true,
                 onAction = KeyboardActions{
-                    if(!validState) return@KeyboardActions
+                    if(!validState) {
+                        return@KeyboardActions
+                    }
 
 
-                    onValueChange(totalBillState.value.trim())
+                    onValueChange(totalBillState.value.trim(), tipPercentage)
 
                     keyboardController?.hide()
                 }
@@ -167,7 +143,7 @@ private fun BillForm(
             if(validState){
 
                 Row(
-                    modifier = Modifier.padding(3.dp),
+                    modifier = modifier.padding(3.dp),
                     horizontalArrangement = Arrangement.Start
                 ){
 
@@ -196,7 +172,7 @@ private fun BillForm(
 
                         Text(
                             text = "${splitByState.value}",
-                            modifier = Modifier
+                            modifier = modifier
                                 .align(Alignment.CenterVertically)
                                 .padding(start = 9.dp, end = 9.dp)
                         )
@@ -218,7 +194,7 @@ private fun BillForm(
                 }
 
 
-                Row(modifier = Modifier
+                Row(modifier = modifier
                     .padding(horizontal = 3.dp, vertical = 12.dp)
                 ){
 
@@ -232,7 +208,7 @@ private fun BillForm(
                     Spacer(modifier = Modifier.width(200.dp))
 
                     Text(
-                        text = "${tipAmountStatevalue.value}%",
+                        text = "${tipAmountState.value}%",
                         modifier = Modifier
                             .align(Alignment.CenterVertically)
 
@@ -255,7 +231,7 @@ private fun BillForm(
                         value = sliderPositionState.value,
                         onValueChange = {newVal ->
                             sliderPositionState.value = newVal
-                            tipAmountStatevalue.value = calculateTotalTip(totalBill = totalBillState.value.toDouble(), tipPercent = tipPercentage)
+                            tipAmountState.value = calculateTotalTip(totalBill = totalBillState.value.toDouble(), tipPercent = tipPercentage)
 
                             totalPerPersonState.value = calculateTotalPerPerson(totalBill = totalBillState.value.toDouble(), splitBy = splitByState.value, tipPercent = tipPercentage)
                         },
@@ -272,6 +248,8 @@ private fun BillForm(
 
             }
             else{
+                totalPerPersonState.value = 0.0
+
                 Box(){}
             }
 
@@ -295,7 +273,32 @@ fun JetTip() {
         Column() {
 
 
-            MainContent()
+            val splitBy = remember {
+                mutableStateOf(1)
+            }
+
+//    val sliderPosition: MutableState<Float> = remember {
+//        mutableStateOf(0f)
+//    }
+
+            val totalTipAmt = remember {
+                mutableStateOf(0.0)
+            }
+//    val totalTipAmt: MutableState<Double> = remember {
+//        mutableStateOf(0.0)
+//    }
+            val totalPerPerson = remember {
+                mutableStateOf(0.0)
+            }
+            BillForm(
+                splitByState = splitBy,
+                tipAmountState = totalTipAmt,
+                totalPerPersonState = totalPerPerson
+            ) { totalBill, tipPercentage ->
+                totalPerPerson.value = calculateTotalPerPerson(totalBill = totalBill.toDouble(), splitBy = splitBy.value, tipPercent = tipPercentage)
+
+            }
+
         }
     }
 }
