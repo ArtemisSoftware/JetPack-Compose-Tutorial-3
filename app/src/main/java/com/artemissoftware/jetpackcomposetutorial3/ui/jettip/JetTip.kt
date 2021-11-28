@@ -1,5 +1,6 @@
 package com.artemissoftware.jetpackcomposetutorial3.ui.jettip
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -52,6 +53,34 @@ private fun TopHeader(totalPerPerson: Double = 0.0) {
     }
     
 }
+
+
+
+@Preview(showBackground = false)
+@Composable
+private fun MainContent() {
+
+    Surface(modifier = Modifier
+        .padding(2.dp)
+        .fillMaxWidth(),
+        shape = RoundedCornerShape(corner = CornerSize(8.dp)),
+        border = BorderStroke(width = 1.dp, color = Color.LightGray)
+    ) {
+
+        Column(
+            modifier = Modifier.padding(12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+
+
+        }
+    }
+
+}
+
+
+
 
 
 @Preview(showBackground = true)
