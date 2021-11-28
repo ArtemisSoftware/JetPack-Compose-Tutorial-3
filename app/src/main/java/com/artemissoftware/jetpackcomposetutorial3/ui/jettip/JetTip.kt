@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Slider
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -99,6 +100,10 @@ private fun BillForm(
         totalBillState.value.trim().isNotEmpty()
     }
 
+    val sliderPositionState = remember {
+        mutableStateOf(0f)
+    }
+
     val keyboardController = LocalSoftwareKeyboardController.current
 
 
@@ -134,7 +139,7 @@ private fun BillForm(
             )
 
 
-            if(validState){
+            if(/*validState*/ true){
 
                 Row(
                     modifier = Modifier.padding(3.dp),
@@ -176,11 +181,56 @@ private fun BillForm(
                         )
                     }
 
+
                 }
             }
             else{
                 Box(){}
             }
+
+
+            Row(modifier = Modifier
+                .padding(horizontal = 3.dp, vertical = 12.dp)
+            ){
+
+                Text(
+                    text = "Tip",
+                    modifier = Modifier
+                        .align(Alignment.CenterVertically)
+
+                )
+
+                Spacer(modifier = Modifier.width(200.dp))
+
+                Text(
+                    text = "2",
+                    modifier = Modifier
+                        .align(Alignment.CenterVertically)
+
+                )
+
+            }
+
+
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Text(
+                    text = "Tip"
+                )
+                Spacer(modifier = Modifier.height(14.dp))
+
+                Slider(
+                    value = sliderPositionState.value,
+                    onValueChange = {newVal ->
+
+                        sliderPositionState.value = newVal
+                    }
+                )
+            }
+
 
         }
     }
