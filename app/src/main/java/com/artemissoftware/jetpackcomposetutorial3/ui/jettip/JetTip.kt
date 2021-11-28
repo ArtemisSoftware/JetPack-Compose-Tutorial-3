@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.artemissoftware.jetpackcomposetutorial3.ui.jettip.components.InputField
+import com.artemissoftware.jetpackcomposetutorial3.ui.jettip.util.calculateTotalTip
 import com.artemissoftware.jetpackcomposetutorial3.ui.jettip.widgets.RoundIconButton
 
 
@@ -114,12 +115,16 @@ private fun BillForm(
         mutableStateOf(1)
     }
 
+    val tipAmountStatevalue = remember {
+        mutableStateOf(0.0)
+    }
+
+
     val range = IntRange(start = 1, endInclusive = 100)
 
     val keyboardController = LocalSoftwareKeyboardController.current
 
 
-    TopHeader()
 
     Surface(modifier = Modifier
         .padding(2.dp)
@@ -222,7 +227,7 @@ private fun BillForm(
                 Spacer(modifier = Modifier.width(200.dp))
 
                 Text(
-                    text = "2",
+                    text = "${tipAmountStatevalue.value}%",
                     modifier = Modifier
                         .align(Alignment.CenterVertically)
 
@@ -245,6 +250,7 @@ private fun BillForm(
                     value = sliderPositionState.value,
                     onValueChange = {newVal ->
                         sliderPositionState.value = newVal
+                        tipAmountStatevalue.value = calculateTotalTip(totalBill = totalBillState.value.toDouble(), tipPercent = tipPercentage)
                     },
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp),
                     steps = 5,
@@ -270,8 +276,11 @@ private fun BillForm(
 fun JetTip() {
 
     Surface(color = MaterialTheme.colors.background) {
-        //TopHeader()
 
-        MainContent()
+        Column() {
+            TopHeader()
+
+            MainContent()
+        }
     }
 }
