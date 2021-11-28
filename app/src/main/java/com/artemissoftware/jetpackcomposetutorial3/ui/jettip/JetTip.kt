@@ -35,6 +35,7 @@ private fun TopHeader(totalPerPerson: Double = 0.0) {
 
     Surface(modifier = Modifier
         .fillMaxWidth()
+        .padding(15.dp)
         .height(150.dp)
         .clip(shape = CircleShape.copy(all = CornerSize(12.dp))),
         //.clip(shape = RoundedCornerShape(corner = CornerSize(12.dp))) // alternative to clipping borders
@@ -104,10 +105,17 @@ private fun BillForm(
         mutableStateOf(0f)
     }
 
+
+    val splitByState = remember {
+        mutableStateOf(1)
+    }
+
+    val range = IntRange(start = 1, endInclusive = 100)
+
     val keyboardController = LocalSoftwareKeyboardController.current
 
 
-
+    TopHeader()
 
     Surface(modifier = Modifier
         .padding(2.dp)
@@ -121,6 +129,9 @@ private fun BillForm(
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Top
         ) {
+
+
+
 
             InputField(
                 valueState = totalBillState,
@@ -162,12 +173,12 @@ private fun BillForm(
                         RoundIconButton(
                             imageVector = Icons.Default.Remove,
                             onClick = {
-
+                                splitByState.value = if(splitByState.value > 1) splitByState.value -1 else 1
                             }
                         )
 
                         Text(
-                            text = "2",
+                            text = "${splitByState.value}",
                             modifier = Modifier
                                 .align(Alignment.CenterVertically)
                                 .padding(start = 9.dp, end = 9.dp)
@@ -176,6 +187,10 @@ private fun BillForm(
                         RoundIconButton(
                             imageVector = Icons.Default.Add,
                             onClick = {
+
+                                if(splitByState.value < range.last){
+                                    splitByState.value = splitByState.value + 1
+                                }
 
                             }
                         )
@@ -225,9 +240,14 @@ private fun BillForm(
                 Slider(
                     value = sliderPositionState.value,
                     onValueChange = {newVal ->
-
                         sliderPositionState.value = newVal
+                    },
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                    steps = 5,
+                    onValueChangeFinished = {
+
                     }
+
                 )
             }
 
@@ -246,7 +266,7 @@ private fun BillForm(
 fun JetTip() {
 
     Surface(color = MaterialTheme.colors.background) {
-        TopHeader()
+        //TopHeader()
 
         MainContent()
     }
