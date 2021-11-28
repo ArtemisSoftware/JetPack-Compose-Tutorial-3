@@ -69,6 +69,26 @@ private fun MainContent(
 
 ) {
 
+
+    BillForm(){ billAmount ->
+
+
+
+    }
+
+}
+
+
+
+@ExperimentalComposeUiApi
+@Preview(showBackground = false)
+@Composable
+private fun BillForm(
+    modifier: Modifier = Modifier,
+    onValueChange: (String)  -> Unit = {}
+
+) {
+
     val totalBillState = remember {
         mutableStateOf("")
     }
@@ -80,17 +100,19 @@ private fun MainContent(
     val keyboardController = LocalSoftwareKeyboardController.current
 
 
+
+
     Surface(modifier = Modifier
-            .padding(2.dp)
-            .fillMaxWidth(),
+        .padding(2.dp)
+        .fillMaxWidth(),
         shape = RoundedCornerShape(corner = CornerSize(8.dp)),
         border = BorderStroke(width = 1.dp, color = Color.LightGray)
     ) {
 
         Column(
-            modifier = Modifier.padding(12.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            modifier = Modifier.padding(6.dp),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.Top
         ) {
 
             InputField(
@@ -101,6 +123,9 @@ private fun MainContent(
                 onAction = KeyboardActions{
                     if(!validState) return@KeyboardActions
 
+
+                    onValueChange(totalBillState.value.trim())
+
                     keyboardController?.hide()
                 }
 
@@ -110,7 +135,6 @@ private fun MainContent(
     }
 
 }
-
 
 
 

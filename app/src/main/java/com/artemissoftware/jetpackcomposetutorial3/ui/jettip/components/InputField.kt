@@ -40,7 +40,7 @@ fun InputField(
         leadingIcon = { Icon(imageVector = Icons.Rounded.AttachMoney, contentDescription = "Money Icon") },
         singleLine = isSingleLine,
         textStyle = TextStyle(fontSize = 18.sp, color = MaterialTheme.colors.onBackground),
-        modifier = modifier.padding(bottom = 10.dp, start = 0.dp, end = 10.dp),
+        modifier = modifier.padding(bottom = 10.dp, start = 10.dp, end = 10.dp),
         enabled = enabled,
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = imeAction),
         keyboardActions = onAction
