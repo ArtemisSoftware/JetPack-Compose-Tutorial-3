@@ -23,35 +23,11 @@ fun ToTheMovies() {
 
     Surface(color = MaterialTheme.colors.background) {
         
-        Scaffold(topBar = {
-            TopAppBar(backgroundColor = Color.Magenta, elevation = 5.dp) {
-                Text(text = "To The Movies")
-            }
-        }) {
-            MovieList()
-        }
-        
+
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun MovieList(movieList : List<String> = listOf("First Blood", "Rambo II", "Rambo III")){
-    
-    Column(modifier = Modifier.padding(12.dp)) {
-        
-        LazyColumn{
 
-            items(items = movieList){
-
-                MovieRow(movie = it){ movie->
-
-                }
-            }
-
-        }
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
