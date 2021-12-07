@@ -1,5 +1,6 @@
 package com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -43,24 +44,26 @@ fun MovieList(movieList : List<String> = listOf("First Blood", "Rambo II", "Ramb
 
             items(items = movieList){
 
-                MovieRow(movie = it)
+                MovieRow(movie = it){ movie->
+
+                }
             }
 
         }
-        
-        
     }
-    
 }
 
 @Preview(showBackground = true)
 @Composable
-fun MovieRow(movie: String = "Terminator"){
+fun MovieRow(movie: String = "Terminator", onItemClick: (String) -> Unit = {}){
     
     Card(modifier = Modifier
         .padding(4.dp)
         .fillMaxWidth()
-        .height(130.dp),
+        .height(130.dp)
+        .clickable {
+            onItemClick(movie)
+        },
         shape = RoundedCornerShape(corner = CornerSize(16.dp)),
         elevation = 6.dp
     ) {
