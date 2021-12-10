@@ -20,7 +20,7 @@ import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.navigation.Mov
 fun HomeScreen(navController: NavController){
 
     Scaffold(topBar = {
-        TopAppBar(backgroundColor = Color.Magenta, elevation = 5.dp) {
+        TopAppBar(backgroundColor = Color.LightGray, elevation = 5.dp) {
             Text(text = "To The Movies")
         }
     }) {
