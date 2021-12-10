@@ -10,11 +10,12 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.MovieRow
+import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.models.Movie
+import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.models.getMovies
 import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.navigation.MovieScreens
+import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.widgets.MovieRow
 
 @Composable
 fun HomeScreen(navController: NavController){
@@ -31,16 +32,15 @@ fun HomeScreen(navController: NavController){
 
 
 @Composable
-fun MovieList(movieList : List<String> = listOf("First Blood", "Rambo II", "Rambo III"), navController: NavController){
+fun MovieList(movieList : List<Movie> = getMovies(), navController: NavController){
 
     Column(modifier = Modifier.padding(12.dp)) {
 
         LazyColumn{
 
-            items(items = movieList){
-
-                MovieRow(movie = it){ movie->
-                    navController.navigate(route = MovieScreens.DetailsScreen.name + "/$movie")
+            items(items = movieList){ movieId->
+                MovieRow(movie = movieId){ id->
+                    navController.navigate(route = MovieScreens.DetailsScreen.name + "/${id}")
                 }
             }
 
