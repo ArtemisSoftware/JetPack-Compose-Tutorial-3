@@ -40,7 +40,7 @@ fun MovieList(movieList : List<String> = listOf("First Blood", "Rambo II", "Ramb
             items(items = movieList){
 
                 MovieRow(movie = it){ movie->
-                    navController.navigate(route = MovieScreens.DetailsScreen.name)
+                    navController.navigate(route = MovieScreens.DetailsScreen.name + "/$movie")
                 }
             }
 
