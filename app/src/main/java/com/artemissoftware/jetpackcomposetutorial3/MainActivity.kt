@@ -3,6 +3,7 @@ package com.artemissoftware.jetpackcomposetutorial3
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.tooling.preview.Preview
@@ -12,6 +13,7 @@ import com.artemissoftware.jetpackcomposetutorial3.ui.theme.JetPackComposeTutori
 import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.navigation.MovieNavigation
 
 class MainActivity : ComponentActivity() {
+    @ExperimentalAnimationApi
     @ExperimentalComposeUiApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

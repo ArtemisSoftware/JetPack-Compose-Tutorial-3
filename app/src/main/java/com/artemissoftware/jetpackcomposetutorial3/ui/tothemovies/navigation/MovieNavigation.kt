@@ -1,5 +1,6 @@
 package com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.navigation
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -9,6 +10,7 @@ import androidx.navigation.navArgument
 import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.screens.HomeScreen
 import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.screens.details.DetailsScreen
 
+@ExperimentalAnimationApi
 @Composable
 fun MovieNavigation(){
 

@@ -1,5 +1,6 @@
 package com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.screens
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,11 +18,12 @@ import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.models.getMovi
 import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.navigation.MovieScreens
 import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.widgets.MovieRow
 
+@ExperimentalAnimationApi
 @Composable
 fun HomeScreen(navController: NavController){
 
     Scaffold(topBar = {
-        TopAppBar(backgroundColor = Color.LightGray, elevation = 5.dp) {
+        TopAppBar(backgroundColor = Color.Transparent, elevation = 0.dp) {
             Text(text = "To The Movies")
         }
     }) {
@@ -31,6 +33,7 @@ fun HomeScreen(navController: NavController){
 }
 
 
+@ExperimentalAnimationApi
 @Composable
 fun MovieList(movieList : List<Movie> = getMovies(), navController: NavController){
 
