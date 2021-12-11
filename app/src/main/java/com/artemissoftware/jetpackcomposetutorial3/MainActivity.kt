@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.artemissoftware.jetpackcomposetutorial3.ui.jettip.JetTip
 import com.artemissoftware.jetpackcomposetutorial3.ui.moneytap.MoneyTap
 import com.artemissoftware.jetpackcomposetutorial3.ui.theme.JetPackComposeTutorial3Theme
+import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.ToTheMovies
 import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.navigation.MovieNavigation
 
 class MainActivity : ComponentActivity() {
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
             JetPackComposeTutorial3Theme {
                 //MoneyTap()
                 //JetTip()
-                MovieNavigation()
+                //ToTheMovies()
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,15 +18,14 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.models.Movie
+import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.navigation.MovieNavigation
 
+@ExperimentalAnimationApi
 @Preview(showBackground = true)
 @Composable
 fun ToTheMovies() {
 
-    Surface(color = MaterialTheme.colors.background) {
-        
-
-    }
+    MovieNavigation()
 }
 
 
