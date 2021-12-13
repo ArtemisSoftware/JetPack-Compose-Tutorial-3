@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                 //MoneyTap()
                 //JetTip()
                 //ToTheMovies()
-                NotesScreen()
+                NotesScreen(notes = emptyList(), onAddNote = {}, onRemoveNote = {})
             }
         }
     }

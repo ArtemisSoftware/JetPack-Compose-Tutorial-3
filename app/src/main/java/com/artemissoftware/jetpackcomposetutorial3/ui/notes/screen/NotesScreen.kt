@@ -22,10 +22,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.artemissoftware.jetpackcomposetutorial3.R
 import com.artemissoftware.jetpackcomposetutorial3.ui.notes.components.NoteInputText
+import com.artemissoftware.jetpackcomposetutorial3.ui.notes.data.Note
 
 @ExperimentalComposeUiApi
 @Composable
-fun NotesScreen(){
+fun NotesScreen(
+    notes: List<Note>,
+    onAddNote: (Note) -> Unit,
+    onRemoveNote: (Note) -> Unit
+){
 
     var title by remember{ mutableStateOf("")}
     var description by remember{ mutableStateOf("")}
@@ -78,7 +83,14 @@ fun NotesScreen(){
 
             NoteButton(
                 text = "Save",
-                onClick = { /*TODO*/ }
+                onClick = {
+
+                    if(title.isNotEmpty() && description.isNotEmpty()){
+                        title = ""
+                        description = ""
+                    }
+
+                }
             )
         }
 
@@ -112,5 +124,5 @@ fun NoteButton(
 @Preview(showBackground = true)
 @Composable
 private fun Preview(){
-    NotesScreen()
+    NotesScreen(notes = emptyList(), onAddNote = {}, onRemoveNote = {})
 }
