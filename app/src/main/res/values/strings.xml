@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">JetPackComposeTutorial3</string>
+    <string name="jet_notes">JetNotes</string>
 </resources>
