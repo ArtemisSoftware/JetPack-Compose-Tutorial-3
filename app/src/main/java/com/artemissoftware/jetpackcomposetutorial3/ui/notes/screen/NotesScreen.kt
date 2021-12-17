@@ -24,6 +24,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.artemissoftware.jetpackcomposetutorial3.R
 import com.artemissoftware.jetpackcomposetutorial3.ui.notes.components.NoteInputText
 import com.artemissoftware.jetpackcomposetutorial3.ui.notes.data.Note
@@ -119,6 +120,26 @@ fun NotesScreen(
     }
 
 }
+
+
+@ExperimentalComposeUiApi
+@Composable
+fun NotesApp(noteViewModel: NoteViewModel = viewModel()){
+
+    val notesList = noteViewModel.getAllNotes()
+
+    NotesScreen(
+        notes = notesList,
+        onAddNote = {
+                    noteViewModel.addNote(it)
+        },
+        onRemoveNote = {
+            noteViewModel.removeNote(it)
+        }
+    )
+
+}
+
 
 @Composable
 fun NoteRow(

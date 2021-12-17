@@ -3,6 +3,7 @@ package com.artemissoftware.jetpackcomposetutorial3
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
@@ -13,6 +14,8 @@ import com.artemissoftware.jetpackcomposetutorial3.ui.jettip.JetTip
 import com.artemissoftware.jetpackcomposetutorial3.ui.moneytap.MoneyTap
 import com.artemissoftware.jetpackcomposetutorial3.ui.notes.data.Note
 import com.artemissoftware.jetpackcomposetutorial3.ui.notes.data.NotesDataSource
+import com.artemissoftware.jetpackcomposetutorial3.ui.notes.screen.NoteViewModel
+import com.artemissoftware.jetpackcomposetutorial3.ui.notes.screen.NotesApp
 import com.artemissoftware.jetpackcomposetutorial3.ui.notes.screen.NotesScreen
 import com.artemissoftware.jetpackcomposetutorial3.ui.theme.JetPackComposeTutorial3Theme
 import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.ToTheMovies
@@ -29,20 +32,10 @@ class MainActivity : ComponentActivity() {
                 //JetTip()
                 //ToTheMovies()
 
+                val viewModel: NoteViewModel by viewModels()
+                NotesApp(noteViewModel = viewModel)
 
-                val notes = remember {
-                    mutableStateListOf<Note>()
-                }
 
-                NotesScreen(
-                    notes = notes,
-                    onAddNote = {
-                        notes.add(it)
-                    },
-                    onRemoveNote = {
-                        notes.remove(it)
-                    }
-                )
             }
         }
     }
