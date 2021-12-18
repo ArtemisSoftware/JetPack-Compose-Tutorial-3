@@ -1,12 +1,13 @@
 package com.artemissoftware.jetpackcomposetutorial3.ui.notes.data
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDatabaseDao {
 
     @Query("SELECT * from notes")
-    fun getNotes(): List<Note>
+    fun getNotes(): Flow<List<Note>>
 
     @Query("SELECT * from notes WHERE id =:id")
     fun getNoteById(id: String): Note
