@@ -34,6 +34,7 @@ class MainActivity : ComponentActivity() {
                 //JetTip()
                 //ToTheMovies()
 
+                //val viewModel: NoteViewModel by viewModels<NoteViewModel>() //alternative
                 val viewModel: NoteViewModel by viewModels()
                 NotesApp(noteViewModel = viewModel)
 

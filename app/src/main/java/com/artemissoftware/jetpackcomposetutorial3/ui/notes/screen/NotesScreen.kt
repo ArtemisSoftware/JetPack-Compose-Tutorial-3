@@ -126,7 +126,7 @@ fun NotesScreen(
 @Composable
 fun NotesApp(noteViewModel: NoteViewModel = viewModel()){
 
-    val notesList = noteViewModel.getAllNotes()
+    val notesList = noteViewModel.noteList.collectAsState().value
 
     NotesScreen(
         notes = notesList,
