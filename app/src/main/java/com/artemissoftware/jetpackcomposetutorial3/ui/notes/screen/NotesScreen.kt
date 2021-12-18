@@ -29,6 +29,7 @@ import com.artemissoftware.jetpackcomposetutorial3.R
 import com.artemissoftware.jetpackcomposetutorial3.ui.notes.components.NoteInputText
 import com.artemissoftware.jetpackcomposetutorial3.ui.notes.data.Note
 import com.artemissoftware.jetpackcomposetutorial3.ui.notes.data.NotesDataSource
+import com.artemissoftware.jetpackcomposetutorial3.util.formatDate
 import java.time.format.DateTimeFormatter
 
 @ExperimentalComposeUiApi
@@ -165,7 +166,7 @@ fun NoteRow(
             Text(text = note.title, style = MaterialTheme.typography.subtitle2)
             Text(text = note.description, style = MaterialTheme.typography.subtitle1)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-               //-- Text(text = note.entryDate.format(DateTimeFormatter.ofPattern("EEE, d MMM")), style = MaterialTheme.typography.subtitle2)
+               Text(text = formatDate(note.entryDate.time), style = MaterialTheme.typography.subtitle2)
             }
         }
         
