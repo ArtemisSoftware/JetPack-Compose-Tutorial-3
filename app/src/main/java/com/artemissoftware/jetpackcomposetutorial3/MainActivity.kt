@@ -20,7 +20,9 @@ import com.artemissoftware.jetpackcomposetutorial3.ui.notes.screen.NotesScreen
 import com.artemissoftware.jetpackcomposetutorial3.ui.theme.JetPackComposeTutorial3Theme
 import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.ToTheMovies
 import com.artemissoftware.jetpackcomposetutorial3.ui.tothemovies.navigation.MovieNavigation
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @ExperimentalAnimationApi
     @ExperimentalComposeUiApi
