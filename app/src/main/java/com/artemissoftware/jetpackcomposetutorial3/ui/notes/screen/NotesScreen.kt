@@ -165,7 +165,7 @@ fun NoteRow(
             Text(text = note.title, style = MaterialTheme.typography.subtitle2)
             Text(text = note.description, style = MaterialTheme.typography.subtitle1)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                Text(text = note.entryDate.format(DateTimeFormatter.ofPattern("EEE, d MMM")), style = MaterialTheme.typography.subtitle2)
+               //-- Text(text = note.entryDate.format(DateTimeFormatter.ofPattern("EEE, d MMM")), style = MaterialTheme.typography.subtitle2)
             }
         }
         
