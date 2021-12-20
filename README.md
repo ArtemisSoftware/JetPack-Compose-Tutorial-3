@@ -9,3 +9,4 @@
   -dependencie injection - Dagger hilt
   -room
 -wheater app
+   - api communication
