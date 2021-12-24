@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.tooling.preview.Preview
 import com.artemissoftware.jetpackcomposetutorial3.ui.jettip.JetTip
+import com.artemissoftware.jetpackcomposetutorial3.ui.jettrivia.screens.TriviaHome
 import com.artemissoftware.jetpackcomposetutorial3.ui.moneytap.MoneyTap
 import com.artemissoftware.jetpackcomposetutorial3.ui.notes.data.Note
 import com.artemissoftware.jetpackcomposetutorial3.ui.notes.data.NotesDataSource
@@ -35,10 +36,11 @@ class MainActivity : ComponentActivity() {
                 //ToTheMovies()
 
                 //val viewModel: NoteViewModel by viewModels<NoteViewModel>() //alternative
-                val viewModel: NoteViewModel by viewModels()
-                NotesApp(noteViewModel = viewModel)
+//                val viewModel: NoteViewModel by viewModels()
+//                NotesApp(noteViewModel = viewModel)
 
 
+                TriviaHome()
             }
         }
     }
@@ -51,6 +53,7 @@ class MainActivity : ComponentActivity() {
 fun DefaultPreview() {
     JetPackComposeTutorial3Theme {
         //MoneyTap()
-        JetTip()
+        //JetTip()
+        TriviaHome()
     }
 }
