@@ -8,8 +8,9 @@
 -notes
   -dependencie injection - Dagger hilt
   -room
--Joke app
+-trivia app
   - api communication
+
 -wheater app
    - api communication
    - complex layouts
