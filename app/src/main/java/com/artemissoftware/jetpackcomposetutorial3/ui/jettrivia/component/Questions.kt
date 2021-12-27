@@ -60,7 +60,13 @@ fun Questions( viewModel: QuestionsViewModel) {
         }
 
         if (questions != null) {
-            QuestionDisplay(question = questions.first())
+            QuestionDisplay(
+                question = question!!,
+                questionIndex = questionIndex,
+                viewModel = viewModel
+            ){
+                questionIndex.value = questionIndex.value + 1
+            }
         }
 //            QuestionDisplay(
 //                question = question!!,
@@ -78,8 +84,8 @@ fun Questions( viewModel: QuestionsViewModel) {
 @Composable
 fun QuestionDisplay(
     question: QuestionItem,
-//    questionIndex: MutableState<Int>,
-//    viewModel: QuestionsViewModel,
+    questionIndex: MutableState<Int>,
+    viewModel: QuestionsViewModel,
     onNextClicked: (Int) -> Unit = {}
 
 ) {
@@ -109,8 +115,7 @@ fun QuestionDisplay(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight()
-            .padding(4.dp),
+            .fillMaxHeight(),
         color = AppColors.mDarkPurple
     ) {
 
@@ -120,7 +125,7 @@ fun QuestionDisplay(
             horizontalAlignment = Alignment.Start
         ) {
 
-            QuestionTracker()
+            QuestionTracker(counter = questionIndex.value)
             DrawDottedLine(pathEffect = pathEffect)
 
             Column {
@@ -179,15 +184,41 @@ fun QuestionDisplay(
                                 }
                             )
                         )
-                        
-                        
-                        Text(text = answerText)
+
+
+                        val annotatedString = buildAnnotatedString {
+                            withStyle(style = SpanStyle(fontWeight = FontWeight.Light,
+                                color = if (correctAnswerState.value == true && index == answerState.value) {
+                                    Color.Green
+                                } else if (correctAnswerState.value == false && index == answerState.value) {
+                                    Color.Red
+                                } else {
+                                    AppColors.mOffWhite
+                                },
+                                fontSize = 17.sp)){
+
+                                append(answerText)
+                            }
+                        }
+                        Text(text = annotatedString, modifier = Modifier.padding(6.dp))
                         
                     }
-
-
                 }
 
+
+                Button(onClick = { onNextClicked(questionIndex.value) },
+                    modifier = Modifier
+                        .padding(3.dp)
+                        .align(alignment = Alignment.CenterHorizontally),
+                    shape = RoundedCornerShape(34.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = AppColors.mLightBlue), content = {
+                        Text(text = "Next",
+                            modifier = Modifier.padding(4.dp),
+                            color = AppColors.mOffWhite,
+                            fontSize = 17.sp)
+
+                    })
 
             }
         }
