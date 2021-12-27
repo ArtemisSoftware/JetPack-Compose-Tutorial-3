@@ -124,6 +124,7 @@ fun QuestionDisplay(
             horizontalAlignment = Alignment.Start
         ) {
 
+            if(questionIndex.value >= 3) ShowProgress(score = questionIndex.value)
             QuestionTracker(counter = questionIndex.value)
             DrawDottedLine(pathEffect = pathEffect)
 
@@ -255,14 +256,24 @@ fun ShowProgress(score: Int = 12) {
         .padding(3.dp)
         .fillMaxWidth()
         .height(45.dp)
-        .border(width = 4.dp,
-            brush = Brush.linearGradient(colors = listOf(AppColors.mLightPurple,
-                AppColors.mLightPurple)),
-            shape = RoundedCornerShape(34.dp))
-        .clip(RoundedCornerShape(topStartPercent = 50,
-            topEndPercent = 50,
-            bottomEndPercent = 50,
-            bottomStartPercent = 50))
+        .border(
+            width = 4.dp,
+            brush = Brush.linearGradient(
+                colors = listOf(
+                    AppColors.mLightPurple,
+                    AppColors.mLightPurple
+                )
+            ),
+            shape = RoundedCornerShape(34.dp)
+        )
+        .clip(
+            RoundedCornerShape(
+                topStartPercent = 50,
+                topEndPercent = 50,
+                bottomEndPercent = 50,
+                bottomStartPercent = 50
+            )
+        )
         .background(Color.Transparent),
         verticalAlignment = Alignment.CenterVertically) {
         Button(
@@ -278,7 +289,8 @@ fun ShowProgress(score: Int = 12) {
                 disabledBackgroundColor = Color.Transparent
             )) {
             Text(text = (score*10).toString(),
-                modifier = Modifier.clip(shape = RoundedCornerShape(23.dp))
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(23.dp))
                     .fillMaxHeight(0.87f)
                     .fillMaxWidth()
                     .padding(6.dp),
