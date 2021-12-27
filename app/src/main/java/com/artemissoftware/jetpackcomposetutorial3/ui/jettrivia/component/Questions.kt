@@ -67,16 +67,9 @@ fun Questions( viewModel: QuestionsViewModel) {
                 questionIndex.value = questionIndex.value + 1
             }
         }
-//            QuestionDisplay(
-//                question = question!!,
-//                questionIndex = questionIndex,
-//                viewModel = viewModel
-//            ){
-//                questionIndex.value = questionIndex.value + 1
-//
-//            }
-        }
+
     }
+}
 
 
 //@Preview
@@ -125,7 +118,7 @@ fun QuestionDisplay(
         ) {
 
             if(questionIndex.value >= 3) ShowProgress(score = questionIndex.value)
-            QuestionTracker(counter = questionIndex.value)
+            QuestionTracker(counter = questionIndex.value, viewModel.getTotalQUestionCount())
             DrawDottedLine(pathEffect = pathEffect)
 
             Column {
